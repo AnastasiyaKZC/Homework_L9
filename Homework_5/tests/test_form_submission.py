@@ -32,14 +32,11 @@ def test_fill_form():
     # Вводим текущий адрес
     browser.element("#currentAddress").type("Ростов-на-Дону, ул.Города Волос")
 
-    # Выбираем штат
-    browser.element("#state").perform(command.js.scroll_into_view).click() # скролл к элементу
-    browser.element("#state").should(be.clickable).click() # задержка до появления списка
-    browser.element("#state").click()
-    browser.all("div.css-11unzgr").element_by(have.text("Haryana")).click()
 
-    # Дожидаемся загрузки списка городов
-    browser.element("#city").should(be.clickable).click() # задержка до появления списка
+    # Выбираю штат и город
+    browser.element("#state").perform(command.js.scroll_into_view).click()
+    browser.all("div.css-11unzgr").element_by(have.text("Haryana")).click()
+    browser.element("#city").should(be.clickable).click()
     browser.all("div.css-11unzgr").element_by(have.text("Karnal")).click()
 
     # Отправляем форму
